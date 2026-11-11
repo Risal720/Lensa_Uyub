@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Daftar Pesanan - LensaUMKM Studio";
-include 'koneksi.php';
+require_once __DIR__ . '/koneksi.php';
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -70,7 +70,7 @@ if (isset($_GET['clear'])) {
     exit;
 }
 
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 ?>
 
 <main class="container my-4">
@@ -185,4 +185,4 @@ include 'includes/header.php';
     </div>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

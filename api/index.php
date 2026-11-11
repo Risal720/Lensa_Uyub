@@ -1,7 +1,7 @@
 <?php
 $pageTitle = "Katalog Paket Foto & Cetak - LENSA UYUB Studio";
-include 'koneksi.php';
-include 'includes/header.php';
+require_once __DIR__ . '/koneksi.php';
+include __DIR__ . '/includes/header.php';
 
 // Ambil data produk/jasa dari database MySQL
 $result = mysqli_query($conn, "SELECT * FROM products ORDER BY id ASC");
@@ -11,11 +11,12 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // Cari file foto di assets/img/ (tetap jalan walau nama file berekstensi ganda .jpg.jpg)
-function getProductImage($filename) {
+function getProductImage(?string $filename): ?string {
     if (empty($filename)) {
         return null;
     }
-    $dir = __DIR__ . '/assets/img/';
+    // Naik satu tingkat ke root project untuk mengakses folder assets/img/
+    $dir = dirname(__DIR__) . '/assets/img/';
     if (file_exists($dir . $filename)) {
         return 'assets/img/' . rawurlencode($filename);
     }
@@ -194,4 +195,4 @@ $needs = [
     </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

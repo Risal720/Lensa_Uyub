@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $pageTitle = "Riwayat Transaksi - LENSA UYUB Studio";
-include 'koneksi.php';
-include 'includes/header.php';
+require_once __DIR__ . '/koneksi.php';
+include __DIR__ . '/includes/header.php';
 
 // Pencarian opsional: nomor invoice, nama, atau nomor WhatsApp
 $keyword = trim($_GET['q'] ?? '');
@@ -124,4 +124,4 @@ $totalOrders = mysqli_num_rows($orders);
     <?php endif; ?>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

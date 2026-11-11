@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Invoice & Payment Gateway - LENSA UYUB Studio";
-include 'koneksi.php';
+require_once __DIR__ . '/koneksi.php';
 
 // ---------------------------------------------------------
 // DAFTAR METODE PEMBAYARAN (dipakai untuk tampilan & validasi)
@@ -23,7 +23,7 @@ foreach ($vaBanks as $bank => $info) { $allowedMethods[] = 'Transfer Virtual Acc
 foreach ($wallets as $wallet => $logo) { $allowedMethods[] = 'E-Wallet ' . $wallet; }
 
 // Cari file logo dari teks metode pembayaran yang tersimpan di database
-function paymentLogo($method) {
+function paymentLogo(string $method): ?string {
     $m = strtolower((string)$method);
     foreach (['qris', 'bca', 'mandiri', 'bri', 'bni', 'gopay', 'dana', 'shopeepay', 'ovo'] as $key) {
         if (strpos($m, $key) !== false) {
@@ -118,7 +118,7 @@ if ($invParam !== '') {
 
 $order = mysqli_fetch_assoc($orderQuery);
 
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 ?>
 
 <style>
@@ -405,7 +405,7 @@ include 'includes/header.php';
     const amount  = <?= (int)$order['total_amount'] ?>;
     const payload = ['LENSAPAY-SANDBOX', invoice, amount, 'ID20261108UMKM001'].join('|');
 
-    new QRCode(box, { text: payload, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+    new window.QRCode(box, { text: payload, width: 200, height: 200, correctLevel: window.QRCode.CorrectLevel.M });
 
     // Unduh sebagai PNG (QR + nomor invoice + nominal)
     document.getElementById('qris-download').addEventListener('click', () => {
@@ -480,4 +480,4 @@ include 'includes/header.php';
 })();
 </script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>

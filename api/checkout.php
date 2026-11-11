@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Formulir Checkout - LENSA UYUB Studio";
-include 'koneksi.php';
+require_once __DIR__ . '/koneksi.php';
 
 // Jika keranjang kosong, kembalikan ke halaman cart
 if (empty($_SESSION['cart'])) {
@@ -26,7 +26,7 @@ $courierCost   = 15000;
 $defaultOngkir = $hasPhysical ? $courierCost : 0;   // keranjang jasa saja = Rp0
 $totalTagihan  = $subtotalProduk + $defaultOngkir;
 
-include 'includes/header.php';
+include __DIR__ . '/includes/header.php';
 ?>
 
 <main class="container my-4">
@@ -149,4 +149,4 @@ document.querySelectorAll('.shipping-radio').forEach(radio => {
 });
 </script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>
