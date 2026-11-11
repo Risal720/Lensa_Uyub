@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Membaca Environment Variables dari Vercel (atau fallback ke XAMPP lokal)
 $host = getenv('DB_HOST') ?: "127.0.0.1";
